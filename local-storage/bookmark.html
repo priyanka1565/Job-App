@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./comman.css">
+</head>
+<body>
+
+    <!--Navbar-->
+    <div id="links">
+        <div>Home</div>
+        <div> <a href="applied.html"></a> Applied Jobs</div>
+        <div><a href="bookmark.html">Bookmarks</a></div>
+
+      </div>
+      <!--Tables creation-->
+       <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Job Applied</th>
+                    <th>Salary Expected</th>
+                    <th>Delete</th>
+                   
+
+                </tr>
+            </thead>
+            <!--Append your output in tbody-->
+            <tbody id="body">
+
+         </tbody>
+        </table>
+       </main> 
+    
+</body>
+</html>
+
+<script>
+
+    var bookmarkArr = JSON.parse(localStorage.getItem("bookmarks"));
+    console.log(bookmarkArr);
+    displayD(bookmarkArr)
+
+    function displayD(bookmarkArr){
+    //   console.log(jobArr);
+ bookmarkArr.forEach(function(elem){
+
+        var tr = document.createElement("tr")
+
+        var td1 = document.createElement("td");
+        td1.innerText = elem.personName;
+
+         var td2 = document.createElement("td");
+         td2.innerText = elem.personEmail;
+
+         var td3 = document.createElement("td");
+         td3.innerText = elem.personRole
+
+           var td4 = document.createElement("td");
+            td4.innerText = elem.personSalary;
+
+            var td5 = document.createElement("td");
+            td5.innerText = "Delete"
+            td5.style.color = "red";
+            td5.style.cursor = "pointer"
+            td5.addEventListener("click",deleteFun)
+
+            tr.append(td1, td2, td3, td4,td5);
+
+            document.querySelector("tbody").append(tr)
+
+    })
+
+}
+
+//delete items
+function deleteFun(elem,index){
+   bookmarkArr.splice(index,1)
+localStorage.setItem("bookmarks",JSON.stringify(bookmarkArr))
+    //deleting items from local storage
+
+
+}
+</script>
